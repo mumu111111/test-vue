@@ -7,13 +7,14 @@
 </head>
 <body>
   <div id="app">
-        {{products}}
+        <!-- {{products}} -->
       <ul>
           <li v-for="product in products">
               {{ product.quantity }} {{ product.name }}
               <span v-if="product.quantity ===0">-OUT OF STOCK</span>
           </li>
       </ul>
+      <h2>Total: {{ totalProducts }}</h2>
   </div>
   
   <script>
@@ -22,7 +23,14 @@
       data:{
         products: []
       },
-      created(){
+      computed: {
+        totalProducts(){//计算总数
+            return this.products.reduce((sum, product)=>{
+                return sum + product.quantity
+            },0)
+        }
+      },
+      created(){//获取数据
           fetch('https://api.myjson.com/bins/74l63')//返回promise对象response
             .then(response => response.json())//获取json内容
             .then(json => {
