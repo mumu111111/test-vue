@@ -7,14 +7,23 @@
 </head>
 <body>
   <div id="app">
-      <h2> {{product}} are in stoke</h2>
+      <ul>
+          <li v-for="product in products">
+              {{ product }}
+          </li>
+      </ul>
   </div>
   
   <script>
     const app= new Vue({
       el: "#app",
       data:{
-        product: 'Boots'
+        products: [
+            'che',
+            'ma',
+            'niu',
+            'yang'
+        ]
       }
     })
     
